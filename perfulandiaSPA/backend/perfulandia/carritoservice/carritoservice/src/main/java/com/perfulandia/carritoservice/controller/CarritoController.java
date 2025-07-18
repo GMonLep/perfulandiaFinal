@@ -13,7 +13,7 @@ import org.springframework.web.client.RestTemplate;
 
 @RestController
 @RequestMapping("/api/carritos")
-
+@CrossOrigin("*")
 public class CarritoController {
     private final CarritoService servicio;
     private final RestTemplate restTemplate;

@@ -15,6 +15,7 @@ import org.springframework.web.client.RestTemplate;
 
 @RestController
 @RequestMapping("/api/productos")
+@CrossOrigin("*")
 public class ProductoController {
 
 
