@@ -319,15 +319,14 @@ fetch('https://resilient-tranquility-usuarios.up.railway.app/api/usuarios')
     .catch(error => console.error('ERROR BUSCANDO USUARIOS:', error));
 
 //AGREGAR usuario DE LA BD
-document.getElementById("formularioGuardarUsuario").addEventListener("submit", function(e) {
+document.getElementById("guardarUsuario").addEventListener("submit", function(e) {
     e.preventDefault();
 
     const nombre = document.getElementById("username").value.trim();
     const correo = document.getElementById("correo").value.trim();
     const rol = document.getElementById("rol").value.trim();
 
-
-    if (!nombre || !correo  || !rol ) return;
+    if (!nombre || !correo || !rol) return;
 
     const usuarioData = { nombre, correo, rol };
 
@@ -340,13 +339,11 @@ document.getElementById("formularioGuardarUsuario").addEventListener("submit", f
             if (!response.ok) throw new Error('Error al guardar usuario');
 
             const text = await response.text();
-            if (text) {
-                return JSON.parse(text);
-            }
+            if (text) return JSON.parse(text);
             return {};
         })
-        .then(usuarioData => {
-            document.getElementById("formularioGuardarUsuario").reset();
+        .then(() => {
+            document.getElementById("guardarUsuario").reset();
             Toastify({
                 text: "¡Usuario agregado con éxito!",
                 backgroundColor: "#4CAF50",
@@ -354,11 +351,61 @@ document.getElementById("formularioGuardarUsuario").addEventListener("submit", f
             }).showToast();
         })
         .catch(error => {
+            console.error("Error:", error);
             Toastify({
                 text: "Error al agregar el usuario.",
                 backgroundColor: "#FF6347",
                 duration: 3000
             }).showToast();
-            console.error("Error:", error);
         });
 });
+
+//actualizar usuario
+const updateUserForm = document.getElementById('formularioActualizarUsuario');
+
+updateUserForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const id = document.getElementById('idActUsuario').value.trim();
+    const nombre = document.getElementById('nuevoUsername').value.trim();
+    const correo = document.getElementById('nuevoCorreo').value.trim();
+    const rol = document.getElementById('nuevoRol').value.trim();
+
+    const campos = {};
+    if (nombre !== '') campos.nombre = nombre;
+    if (correo !== '') campos.correo = correo;
+    if (rol !== '') campos.rol = rol;
+
+    if (id && Object.keys(campos).length > 0) {
+        actualizarUsuario(id, campos);
+        updateUserForm.reset(); // ✅ works safely now
+    } else {
+        alert('Ingresa un ID y campos válido');
+    }
+});
+
+function actualizarUsuario(idActUsuario, campos) {
+    const url = `https://resilient-tranquility-usuarios.up.railway.app/api/usuarios/${encodeURIComponent(idActUsuario)}`;
+
+    fetch(url, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(campos)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('No se pudo actualizar el Usuario.');
+            }
+            return response.json();
+        })
+        .then(data => {
+            alert(`Usuario actualizado`);
+        })
+        .catch(error => {
+            alert(`Error al actualizar: ${error.message}`);
+        });
+}
+
+
