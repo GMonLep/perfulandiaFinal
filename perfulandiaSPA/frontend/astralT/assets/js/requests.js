@@ -408,4 +408,121 @@ function actualizarUsuario(idActUsuario, campos) {
         });
 }
 
+//ELMINAR USUARIO
+
+const eliminarForm2 = document.getElementById('eliminarUsuario');
+const eliminarInput2 = document.getElementById('eliminarId2');
+
+eliminarForm2.addEventListener('submit', (e) => {
+    e.preventDefault(); // prevent form from reloading the page
+    const id = eliminarInput2.value.trim();
+    if (id !== '') {
+        eliminarUsuario(id);
+        eliminarInput2.value = ''; // clear input
+    }
+});
+
+function eliminarUsuario(id) {
+    const url = `https://resilient-tranquility-usuarios.up.railway.app/api/usuarios/${encodeURIComponent(id)}`;
+
+    if (!confirm(`¿Estás seguro de que quieres eliminar el producto con ID ${id}?`)) {
+        return;
+    }
+
+    fetch(url, {
+        method: 'DELETE'
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('No se pudo eliminar el producto. Puede que no exista.');
+            }
+            alert(`ID ${id} eliminado exitosamente.`);
+        })
+        .catch(error => {
+            alert(`Error al eliminar producto: ${error.message}`);
+        });
+}
+
+//BUSCAR PRODUCTO
+//Declarar cada id del HTML y almacenarlo en una variable
+
+const searchBtn2 = document.getElementById('searchBtn2');
+const searchInput2 = document.getElementById('searchInput2');
+const loader2 = document.getElementById('loader2');
+const results2 = document.getElementById('results2');
+
+
+searchBtn2.addEventListener('click', () => {
+    const query = searchInput.value.trim();
+    if (query !== '') {
+        listaUsuarios.classList.add('hidden');
+        results.classList.remove('hidden');
+        buscarUsuario(query);
+    } else {
+        listaUsuarios.classList.remove('hidden');
+        results.classList.add('hidden');
+    }
+});
+
+function buscarUsuario(id) {
+    loader.classList.remove('hidden');
+    results.innerHTML = '';
+
+    const url = `https://resilient-tranquility-usuarios.up.railway.app/api/usuarios/${encodeURIComponent(idProducto)}`;
+
+    fetch(url)
+        .then(async response => {
+            if (!response.ok) {y
+                const text = await response.text();
+                throw new Error(text || 'Usuario no encontrado');
+            }
+
+            const contentType = response.headers.get('content-type') || '';
+            if (!contentType.includes('application/json')) {
+                throw new Error('No se ha encontrado Usuario con ese ID');
+            }
+
+            return response.json();
+        })
+        .then(usuarioData => {
+            mostrarResultados([usuarioData]);
+        })
+        .catch(error => {
+            results.innerHTML = `<p class="text-red-600">Error: ${error.message}</p>`;
+        })
+        .finally(() => {
+            loader.classList.add('hidden');
+        });
+}
+
+
+
+function mostrarUsuario(usuario){
+    if(usuario.length===0){
+        results.innerHTML = `<p class="text-red-600">No se encontraron usuarios</p>`;
+        return
+    }
+
+    usuario.forEach(usuario => {
+        const li = document.createElement('li');
+        li.className = "p-6 border rounded-xl shadow-sm bg-white hover:shadow-md transition list-none";
+        li.innerHTML = `
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+          <div>
+            <p class="text-sm text-gray-500">ID: <span class="font-medium text-gray-700">${usuario.id}</span></p>
+            <h2 class="text-lg font-semibold text-gray-800">${usuario.nombre}</h2>
+          </div>
+          <div class="text-right ">
+            <p class="text-sm text-gray-600 ">Correo: <span class="font-medium text-green-600">${usuario.correo}</span></p>
+            <p class="text-sm text-gray-600">Rol: <span class="font-medium text-blue-600">${usuario.rol}</span></p>
+          </div>
+        </div>
+      `;
+
+        results.appendChild(li);
+    });
+
+}
+
+
 

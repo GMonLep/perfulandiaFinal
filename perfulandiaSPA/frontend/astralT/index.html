@@ -166,17 +166,23 @@
 								<!-- ELIMINAR USUARIO -->
 								<div id="formularioEliminarUsuario" class="user-form hidden">
 									<form id="eliminarUsuario">
-										<!-- Fields here -->
-										<p class="text-gray-600">Formulario para eliminar usuario...</p>
-									</form>
+                                        <input type="text" id="eliminarId2" placeholder="ID del Usuario a eliminar" class="border border-stone-800 px-3 py-2 rounded-lg shadow focus:outline-none focus:ring-2 focus:ring-red-500">
+                                        <button class="bg-red-800 hover:bg-red-900 text-white px-4 py-2 rounded-lg shadow transition">Eliminar</button>
+                                    </form>
 								</div>
 
-								<!-- BUSCAR USUARIO -->
-								<div id="formularioBuscarUsuario" class="user-form hidden">
-									<form id="buscarUsuario">
+                                <!-- BUSCAR USUARIO -->
+                                <form id="buscarUsuario" class="formulario hidden flex flex-wrap gap-2 justify-center mb-8">
+                                    <input type="text" id="searchInput2" placeholder="ID del Usuario" class="border border-stone-800 px-3 py-2 rounded-lg shadow focus:outline-none focus:ring-2 focus:ring-cyan-500">
+                                    <button id="searchBtn2" class="bg-blue-800 hover:bg-blue-900 text-white px-4 py-2 rounded-lg shadow transition">Buscar</button>
+                                </form>
+                                <!--MENSAJE "CARGANDO"-->
+                                <div id="loader2" class="hidden text-center text-cyan-800 mb-4 animate-pulse"><p>Cargando...</p></div>
 
-									</form>
-								</div>
+                                <!--DIV EN DONDE SE MUESTRAN LOS RESULTADOS-->
+                                <div id="results2" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+
+
 
 
 								<!--LISTA DE USUARIOS--->
