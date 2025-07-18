@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="7eb72243-329b-49f4-8b9a-b68a787fc0ae" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../productservice/productservice/src/test/java/com/perfulandia/productservice/controller/ProductoControllerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../usuarioservice/usuarioservice/mvnw" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../usuarioservice/usuarioservice/mvnw.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../usuarioservice/usuarioservice/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../usuarioservice/usuarioservice/src/main/java/com/perfulandia/usuarioservice/UsuarioserviceApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../usuarioservice/usuarioservice/src/main/java/com/perfulandia/usuarioservice/controller/UsuarioController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../usuarioservice/usuarioservice/src/main/java/com/perfulandia/usuarioservice/model/Usuario.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../usuarioservice/usuarioservice/src/main/java/com/perfulandia/usuarioservice/repository/UsuarioRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../usuarioservice/usuarioservice/src/main/java/com/perfulandia/usuarioservice/service/UsuarioService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../usuarioservice/usuarioservice/src/main/resources/application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../usuarioservice/usuarioservice/src/test/java/com/perfulandia/usuarioservice/UsuarioserviceApplicationTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../usuarioservice/usuarioservice/src/test/java/com/perfulandia/usuarioservice/controller/UsuarioControllerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../usuarioservice/usuarioservice/target/classes/application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../usuarioservice/usuarioservice/target/classes/com/perfulandia/usuarioservice/UsuarioserviceApplication.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../usuarioservice/usuarioservice/target/classes/com/perfulandia/usuarioservice/controller/UsuarioController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../usuarioservice/usuarioservice/target/classes/com/perfulandia/usuarioservice/model/Usuario$UsuarioBuilder.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../usuarioservice/usuarioservice/target/classes/com/perfulandia/usuarioservice/model/Usuario.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../usuarioservice/usuarioservice/target/classes/com/perfulandia/usuarioservice/repository/UsuarioRepository.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../usuarioservice/usuarioservice/target/classes/com/perfulandia/usuarioservice/service/UsuarioService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../usuarioservice/usuarioservice/target/test-classes/com/perfulandia/usuarioservice/UsuarioserviceApplicationTests.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../avancesLog/testDeleteCorreoOK.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../avancesLog/testDeleteIdOK.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../avancesLog/testGetOK.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../avancesLog/testPostOK.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../avancesLog/testPutOK.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../puertogames2/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../puertogames2/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../puertogames2/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../puertogames2/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../puertogames2/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../puertogames2/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../puertogames2/.idea/puertogames2.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../puertogames2/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../puertogames2/backend/puertogames-api/.gitattributes" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../puertogames2/backend/puertogames-api/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../puertogames2/backend/puertogames-api/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../puertogames2/backend/puertogames-api/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../puertogames2/backend/puertogames-api/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../puertogames2/backend/puertogames-api/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../puertogames2/backend/puertogames-api/src/main/java/com/puertogames/puertogames_api/PuertogamesApiApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../puertogames2/backend/puertogames-api/src/main/java/com/puertogames/puertogames_api/controller/LoginController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../puertogames2/backend/puertogames-api/src/main/java/com/puertogames/puertogames_api/controller/UsuarioController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../puertogames2/backend/puertogames-api/src/main/java/com/puertogames/puertogames_api/controller/VideojuegoController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../puertogames2/backend/puertogames-api/src/main/java/com/puertogames/puertogames_api/model/Usuario.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../puertogames2/backend/puertogames-api/src/main/java/com/puertogames/puertogames_api/model/Videojuego.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../puertogames2/backend/puertogames-api/src/main/java/com/puertogames/puertogames_api/repository/UsuarioRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../puertogames2/backend/puertogames-api/src/main/java/com/puertogames/puertogames_api/repository/VideojuegoRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../puertogames2/backend/puertogames-api/src/main/java/com/puertogames/puertogames_api/service/UsuarioService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../puertogames2/backend/puertogames-api/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../puertogames2/backend/puertogames-api/src/test/java/com/puertogames/puertogames_api/PuertogamesApiApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../puertogames2/backend/puertogames-api/src/test/java/com/puertogames/puertogames_api/controller/UsuarioControllerTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../puertogames2/frontend/busqueda.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../puertogames2/frontend/img/apex.avif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../puertogames2/frontend/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../puertogames2/frontend/js/main.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../puertogames2/frontend/login.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../puertogames2/frontend/stockTienda.html" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 4
+}]]></component>
+  <component name="ProjectId" id="2z7P0T1Q0hSYMkBQlVF2iEZZJ7R" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "last_opened_file_path": "C:/Users/gmont/Desktop/EV3-Perfulandia/Perfulandia_evaluacion2_FullStack-main/carritoservice",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-fbdcb00ec9e3-intellij.indexing.shared.core-IU-251.25410.129" />
+        <option value="bundled-js-predefined-d6986cc7102b-6a121458b545-JavaScript-IU-251.25410.129" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7eb72243-329b-49f4-8b9a-b68a787fc0ae" name="Changes" comment="" />
+      <created>1751078914488</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1751078914488</updated>
+      <workItem from="1751078916062" duration="4000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
