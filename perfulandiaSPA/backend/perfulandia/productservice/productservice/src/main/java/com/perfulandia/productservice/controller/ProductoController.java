@@ -43,6 +43,7 @@ public class ProductoController {
     public Producto buscar(@PathVariable long id){
         return servicio.bucarPorId(id);
     }
+
     //Eliminar
     @DeleteMapping("/{id}")
     public void eliminar(@PathVariable long id){

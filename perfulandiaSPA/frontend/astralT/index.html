@@ -11,6 +11,9 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+		<script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 	</head>
 	<body class="is-preload">
 
@@ -21,8 +24,8 @@
 					<nav id="nav">
 						<a href="#" class="icon solid fa-home"><span>Inicio</span></a>
 						<a href="#work" class="icon solid fa-folder"><span>Productos</span></a>
-						<a href="#contact" class="icon solid fa-envelope"><span>Contact</span></a>
-						<a href="https://twitter.com/ajlkn" class="icon brands fa-twitter"><span>Twitter</span></a>
+						<a href="#contact" class="icon solid fa-envelope"><span>Personal</span></a>
+						<a href="https://twitter.com/ajlkn" class="icon brands fa-twitter"><span>Carrito</span></a>
 					</nav>
 
 				<!-- Main -->
@@ -46,44 +49,123 @@
 									<h2>Productos</h2>
 								</header>
 								<p>
-									Productos ordenados por orden de adición, se facilita la eliminación y el agregado de nuevos productos.
+									Productos ordenados por orden de adición, se facilita la eliminación y el agregado de nuevos productos. Controle el stock fácilmente.
 								</p>
-								<ul id="listaProductos"></ul>
-								<section>
-									<div class="row">
-										<div class="col-4 col-6-medium col-12-small">
-											<a href="#" class="image fit"><img src="images/pic01.jpg" alt=""></a>
-										</div>
-									</div>
+								<!-- FORMULARIO -->
+								<nav class="flex justify-center gap-4 mb-6">
+									<button id="tab-agregar" class="px-4 py-2 border rounded-lg">Agregar</button>
+									<button id="tab-buscar" class="px-4 py-2 border rounded-lg">Buscar</button>
+									<button id="tab-eliminar" class="px-4 py-2 border rounded-lg">Eliminar</button>
+									<button id="tab-actualizar" class="px-4 py-2 border rounded-lg">Actualizar</button>
+								</nav>
+
+								<!-- AGREGAR PERFUME -->
+								<form method="post" id="formularioPerfume" class="formulario flex flex-wrap gap-2 justify-center mb-8">
+									<input type="text" id="nombre" name="nombre" placeholder="Perfume Mujer Nina Ricci Nature" class="border border-stone-800 px-3 py-2 rounded-lg shadow focus:outline-none focus:ring-2 focus:ring-cyan-500">
+									<input type="number" id="precio" name="precio" placeholder="$90000" class="border border-stone-800 px-3 py-2 w-24 rounded-lg shadow focus:outline-none focus:ring-2 focus:ring-cyan-500">
+									<input type="number" id="stock" name="stock" placeholder="20" class="border border-stone-800 px-3 py-2 w-20 rounded-lg shadow focus:outline-none focus:ring-2 focus:ring-cyan-500">
+									<button class="bg-teal-950 hover:bg-cyan-900 text-white px-4 py-2 rounded-lg shadow transition" id="btn">Agregar</button>
+								</form>
+
+								<!-- BUSCAR PERFUME -->
+								<form id="formularioBuscar" class="formulario hidden flex flex-wrap gap-2 justify-center mb-8">
+									<input type="text" id="searchInput" placeholder="ID del producto" class="border border-stone-800 px-3 py-2 rounded-lg shadow focus:outline-none focus:ring-2 focus:ring-cyan-500">
+									<button id="searchBtn" class="bg-blue-800 hover:bg-blue-900 text-white px-4 py-2 rounded-lg shadow transition">Buscar</button>
+								</form>
+								<!--MENSAJE "CARGANDO"-->
+								<div id="loader" class="hidden text-center text-cyan-800 mb-4 animate-pulse"><p>Cargando...</p></div>
+
+								<!--DIV EN DONDE SE MUESTRAN LOS RESULTADOS-->
+								<div id="results" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+
+								<!-- ELIMINAR PERFUME -->
+								<form id="formularioEliminar" class="formulario hidden flex flex-wrap gap-2 justify-center mb-8">
+									<input type="text" id="eliminarId" placeholder="ID del producto a eliminar" class="border border-stone-800 px-3 py-2 rounded-lg shadow focus:outline-none focus:ring-2 focus:ring-red-500">
+									<button class="bg-red-800 hover:bg-red-900 text-white px-4 py-2 rounded-lg shadow transition">Eliminar</button>
+								</form>
+
+								<!-- ACTUALIZAR PERFUME -->
+								<form id="formularioActualizar" class="formulario hidden flex flex-wrap gap-2 justify-center mb-8">
+									<input type="text" id="actualizarId" placeholder="ID del producto" class="border px-3 py-2 rounded-lg shadow">
+									<input type="text" id="nuevoNombre" placeholder="Nuevo nombre" class="border px-3 py-2 rounded-lg shadow">
+									<input type="number" id="nuevoePrecio" placeholder="Nuevo precio" class="border px-3 py-2 rounded-lg shadow">
+									<input type="number" id="nuevoStock" placeholder="Nuevo stock" class="border px-3 py-2 rounded-lg shadow">
+									<button type="submit" class="bg-yellow-700 hover:bg-yellow-800 text-white px-4 py-2 rounded-lg shadow transition">Actualizar</button>
+								</form>
+
+								<!--LISTA DE PRODUCTOS--->
+								<section class="p-4 max-w-3xl mx-auto">
+									<ul id="listaProductos" class="flex flex-col gap-4 list-none"></ul>
 								</section>
+
 							</article>
+
 
 						<!-- Contact -->
 							<article id="contact" class="panel">
 								<header>
-									<h2>Contact Me</h2>
+									<h2>Administración personal</h2>
+									<p>
+										Crea nuevos roles para tu personal, maneja fácilmente sus datos en un sólo lugar.
+									</p>
 								</header>
-								<form action="#" method="post">
-									<div>
-										<div class="row">
-											<div class="col-6 col-12-medium">
-												<input type="text" name="name" placeholder="Name" />
-											</div>
-											<div class="col-6 col-12-medium">
-												<input type="text" name="email" placeholder="Email" />
-											</div>
-											<div class="col-12">
-												<input type="text" name="subject" placeholder="Subject" />
-											</div>
-											<div class="col-12">
-												<textarea name="message" placeholder="Message" rows="6"></textarea>
-											</div>
-											<div class="col-12">
-												<input type="submit" value="Send Message" />
+								<nav class="flex justify-center gap-4 mb-6">
+									<button id="tab-guardar-user" class="px-4 py-2 border rounded-lg">Guardar</button>
+									<button id="tab-actualizar-user" class="px-4 py-2 border rounded-lg">Actualizar</button>
+									<button id="tab-eliminar-user" class="px-4 py-2 border rounded-lg">Eliminar</button>
+									<button id="tab-buscar-user" class="px-4 py-2 border rounded-lg">Buscar</button>
+								</nav>
+								<!-- GUARDAR USUARIO -->
+								<div id="formularioGuardarUsuario" class="user-form">
+									<form id="guardarUsuario">
+										<div>
+											<div class="row">
+												<div class="col-6 col-12-medium">
+													<input type="text" name="name" placeholder="Name" />
+												</div>
+												<div class="col-6 col-12-medium">
+													<input type="text" name="email" placeholder="Email" />
+												</div>
+												<div class="col-12">
+													<input type="text" name="subject" placeholder="Rol" />
+												</div>
+												<div class="col-12">
+													<input type="submit" value="Guardar" />
+												</div>
 											</div>
 										</div>
-									</div>
-								</form>
+									</form>
+								</div>
+
+								<!-- ACTUALIZAR USUARIO (you'll add form fields later) -->
+								<div id="formularioActualizarUsuario" class="user-form hidden">
+									<form id="actualizarUsuario">
+										<!-- Fields here -->
+										<p class="text-gray-600">Formulario para actualizar usuario...</p>
+									</form>
+								</div>
+
+								<!-- ELIMINAR USUARIO -->
+								<div id="formularioEliminarUsuario" class="user-form hidden">
+									<form id="eliminarUsuario">
+										<!-- Fields here -->
+										<p class="text-gray-600">Formulario para eliminar usuario...</p>
+									</form>
+								</div>
+
+								<!-- BUSCAR USUARIO -->
+								<div id="formularioBuscarUsuario" class="user-form hidden">
+									<form id="buscarUsuario">
+										<!-- Fields here -->
+										<p class="text-gray-600">Formulario para buscar usuario...</p>
+									</form>
+								</div>
+
+
+								<!--LISTA DE USUARIOS--->
+								<section class="p-4 max-w-3xl mx-auto">
+									<ul id="listaUsuarios" class="flex flex-col gap-4 list-none"></ul>
+								</section>
 							</article>
 
 					</div>
