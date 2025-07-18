@@ -524,5 +524,268 @@ function mostrarUsuario(usuario){
 
 }
 
+//cambiar carrito
+const userTabs = {
+    guardar: document.getElementById("GuardarCarrito"),
+    actualizar: document.getElementById("ActualizarCarrito"),
+    eliminar: document.getElementById("EliminarCarrito"),
+    buscar: document.getElementById("buscarCarrito"),
+};
+
+const userButtons = {
+    guardar: document.getElementById("tab-guardar-carrito"),
+    actualizar: document.getElementById("tab-actualizar-carrito"),
+    eliminar: document.getElementById("tab-eliminar-carrito"),
+    buscar: document.getElementById("tab-buscar-carrito"),
+};
+
+function switchUserTab(tabName) {
+    Object.keys(userTabs).forEach(key => {
+        userTabs[key].classList.toggle("hidden", key !== tabName);
+        userButtons[key].classList.toggle("bg-cyan-800", key === tabName);
+        userButtons[key].classList.toggle("text-white", key === tabName);
+        userButtons[key].classList.toggle("border", key !== tabName);
+    });
+}
+
+userButtons.guardar.addEventListener("click", () => switchUserTab("guardar"));
+userButtons.actualizar.addEventListener("click", () => switchUserTab("actualizar"));
+userButtons.eliminar.addEventListener("click", () => switchUserTab("eliminar"));
+userButtons.buscar.addEventListener("click", () => switchUserTab("buscar"));
+
+switchUserTab("guardar");
+
+//MOSTRAR USUARIOS DE LA BD
+fetch('https://motivated-hope-carrito.up.railway.app/api/carritos')
+    .then(response => response.json())
+    .then(data => {
+        const list = document.getElementById('listaUsuarios');
+
+        data.forEach(usuario => {
+            const li = document.createElement('li');
+            li.className = "p-6 border rounded-xl shadow-sm bg-white hover:shadow-md transition list-none";
+            li.innerHTML = `
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+          <div>
+            <p class="text-sm text-gray-500">ID: <span class="font-medium text-gray-700">${usuario.id}</span></p>
+            <h2 class="text-lg font-semibold text-gray-800">${usuario.nombre}</h2>
+          </div>
+          <div class="text-right ">
+            <p class="text-sm text-gray-600 ">Correo: <span class="font-medium text-green-600">${usuario.correo}</span></p>
+            <p class="text-sm text-gray-600">Rol: <span class="font-medium text-blue-600">${usuario.rol}</span></p>
+          </div>
+        </div>
+      `;
+            list.appendChild(li);
+        });
+    })
+    .catch(error => console.error('ERROR BUSCANDO USUARIOS:', error));
+
+//AGREGAR usuario DE LA BD
+document.getElementById("guardarUsuario").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const nombre = document.getElementById("username").value.trim();
+    const correo = document.getElementById("correo").value.trim();
+    const rol = document.getElementById("rol").value.trim();
+
+    if (!nombre || !correo || !rol) return;
+
+    const usuarioData = { nombre, correo, rol };
+
+    fetch('https://resilient-tranquility-usuarios.up.railway.app/api/usuarios', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(usuarioData),
+    })
+        .then(async response => {
+            if (!response.ok) throw new Error('Error al guardar usuario');
+
+            const text = await response.text();
+            if (text) return JSON.parse(text);
+            return {};
+        })
+        .then(() => {
+            document.getElementById("guardarUsuario").reset();
+            Toastify({
+                text: "¡Usuario agregado con éxito!",
+                backgroundColor: "#4CAF50",
+                duration: 3000
+            }).showToast();
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            Toastify({
+                text: "Error al agregar el usuario.",
+                backgroundColor: "#FF6347",
+                duration: 3000
+            }).showToast();
+        });
+});
+
+//actualizar usuario
+const updateUserForm = document.getElementById('formularioActualizarUsuario');
+
+updateUserForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const id = document.getElementById('idActUsuario').value.trim();
+    const nombre = document.getElementById('nuevoUsername').value.trim();
+    const correo = document.getElementById('nuevoCorreo').value.trim();
+    const rol = document.getElementById('nuevoRol').value.trim();
+
+    const campos = {};
+    if (nombre !== '') campos.nombre = nombre;
+    if (correo !== '') campos.correo = correo;
+    if (rol !== '') campos.rol = rol;
+
+    if (id && Object.keys(campos).length > 0) {
+        actualizarUsuario(id, campos);
+        updateUserForm.reset(); // ✅ works safely now
+    } else {
+        alert('Ingresa un ID y campos válido');
+    }
+});
+
+function actualizarUsuario(idActUsuario, campos) {
+    const url = `https://resilient-tranquility-usuarios.up.railway.app/api/usuarios/${encodeURIComponent(idActUsuario)}`;
+
+    fetch(url, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(campos)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('No se pudo actualizar el Usuario.');
+            }
+            return response.json();
+        })
+        .then(data => {
+            alert(`Usuario actualizado`);
+        })
+        .catch(error => {
+            alert(`Error al actualizar: ${error.message}`);
+        });
+}
+
+//ELMINAR USUARIO
+
+const eliminarForm2 = document.getElementById('eliminarUsuario');
+const eliminarInput2 = document.getElementById('eliminarId2');
+
+eliminarForm2.addEventListener('submit', (e) => {
+    e.preventDefault(); // prevent form from reloading the page
+    const id = eliminarInput2.value.trim();
+    if (id !== '') {
+        eliminarUsuario(id);
+        eliminarInput2.value = ''; // clear input
+    }
+});
+
+function eliminarUsuario(id) {
+    const url = `https://resilient-tranquility-usuarios.up.railway.app/api/usuarios/${encodeURIComponent(id)}`;
+
+    if (!confirm(`¿Estás seguro de que quieres eliminar el producto con ID ${id}?`)) {
+        return;
+    }
+
+    fetch(url, {
+        method: 'DELETE'
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('No se pudo eliminar el producto. Puede que no exista.');
+            }
+            alert(`ID ${id} eliminado exitosamente.`);
+        })
+        .catch(error => {
+            alert(`Error al eliminar producto: ${error.message}`);
+        });
+}
+
+//BUSCAR PRODUCTO
+//Declarar cada id del HTML y almacenarlo en una variable
+
+const searchBtn2 = document.getElementById('searchBtn2');
+const searchInput2 = document.getElementById('searchInput2');
+const loader2 = document.getElementById('loader2');
+const results2 = document.getElementById('results2');
+
+
+searchBtn2.addEventListener('click', () => {
+    const query = searchInput.value.trim();
+    if (query !== '') {
+        listaUsuarios.classList.add('hidden');
+        results.classList.remove('hidden');
+        buscarUsuario(query);
+    } else {
+        listaUsuarios.classList.remove('hidden');
+        results.classList.add('hidden');
+    }
+});
+
+function buscarUsuario(id) {
+    loader.classList.remove('hidden');
+    results.innerHTML = '';
+
+    const url = `https://resilient-tranquility-usuarios.up.railway.app/api/usuarios/${encodeURIComponent(idProducto)}`;
+
+    fetch(url)
+        .then(async response => {
+            if (!response.ok) {y
+                const text = await response.text();
+                throw new Error(text || 'Usuario no encontrado');
+            }
+
+            const contentType = response.headers.get('content-type') || '';
+            if (!contentType.includes('application/json')) {
+                throw new Error('No se ha encontrado Usuario con ese ID');
+            }
+
+            return response.json();
+        })
+        .then(usuarioData => {
+            mostrarUsuario([usuarioData]);
+        })
+        .catch(error => {
+            results.innerHTML = `<p class="text-red-600">Error: ${error.message}</p>`;
+        })
+        .finally(() => {
+            loader.classList.add('hidden');
+        });
+}
+
+
+
+function mostrarUsuario(usuario){
+    if(usuario.length===0){
+        results.innerHTML = `<p class="text-red-600">No se encontraron usuarios</p>`;
+        return
+    }
+
+    usuario.forEach(usuario => {
+        const li = document.createElement('li');
+        li.className = "p-6 border rounded-xl shadow-sm bg-white hover:shadow-md transition list-none";
+        li.innerHTML = `
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+          <div>
+            <p class="text-sm text-gray-500">ID: <span class="font-medium text-gray-700">${usuario.id}</span></p>
+            <h2 class="text-lg font-semibold text-gray-800">${usuario.nombre}</h2>
+          </div>
+          <div class="text-right ">
+            <p class="text-sm text-gray-600 ">Correo: <span class="font-medium text-green-600">${usuario.correo}</span></p>
+            <p class="text-sm text-gray-600">Rol: <span class="font-medium text-blue-600">${usuario.rol}</span></p>
+          </div>
+        </div>
+      `;
+
+        results.appendChild(li);
+    });
+
+}
+
 
 
