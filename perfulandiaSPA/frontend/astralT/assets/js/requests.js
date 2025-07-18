@@ -525,21 +525,21 @@ function mostrarUsuario(usuario){
 }
 
 //cambiar carrito
-const userTabs = {
+const carritoTabs = {
     guardar: document.getElementById("GuardarCarrito"),
     actualizar: document.getElementById("ActualizarCarrito"),
     eliminar: document.getElementById("EliminarCarrito"),
     buscar: document.getElementById("buscarCarrito"),
 };
 
-const userButtons = {
+const carritoButtons = {
     guardar: document.getElementById("tab-guardar-carrito"),
     actualizar: document.getElementById("tab-actualizar-carrito"),
     eliminar: document.getElementById("tab-eliminar-carrito"),
     buscar: document.getElementById("tab-buscar-carrito"),
 };
 
-function switchUserTab(tabName) {
+function switchCarrITOtABS(tabName) {
     Object.keys(userTabs).forEach(key => {
         userTabs[key].classList.toggle("hidden", key !== tabName);
         userButtons[key].classList.toggle("bg-cyan-800", key === tabName);
@@ -677,11 +677,11 @@ const eliminarForm2 = document.getElementById('eliminarUsuario');
 const eliminarInput2 = document.getElementById('eliminarId2');
 
 eliminarForm2.addEventListener('submit', (e) => {
-    e.preventDefault(); // prevent form from reloading the page
+    e.preventDefault();
     const id = eliminarInput2.value.trim();
     if (id !== '') {
         eliminarUsuario(id);
-        eliminarInput2.value = ''; // clear input
+        eliminarInput2.value = '';
     }
 });
 
@@ -716,7 +716,7 @@ const results2 = document.getElementById('results2');
 
 
 searchBtn2.addEventListener('click', () => {
-    const query = searchInput.value.trim();
+    const query = searchInput2.value.trim();
     if (query !== '') {
         listaUsuarios.classList.add('hidden');
         results.classList.remove('hidden');
