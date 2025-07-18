@@ -36,7 +36,7 @@ public class CarritoService {
         for (ProductoDTO productoDTO : productoDTOS) {
             try {
                 ProductoDTO producto = restTemplate.getForObject(
-                        "http://localhost:8082/api/productos/producto/" + productoDTO.getProductoId(),
+                        "https://perfulandia-final.vercel.app/productos/producto/" + productoDTO.getProductoId(),
                         ProductoDTO.class
                 );
                 CarritoItem item = CarritoItem.builder()

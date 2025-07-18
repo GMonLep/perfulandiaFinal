@@ -266,7 +266,7 @@ const userTabs = {
     guardar: document.getElementById("formularioGuardarUsuario"),
     actualizar: document.getElementById("formularioActualizarUsuario"),
     eliminar: document.getElementById("formularioEliminarUsuario"),
-    buscar: document.getElementById("formularioBuscarUsuario"),
+    buscar: document.getElementById("buscarUsuario"),
 };
 
 const userButtons = {
@@ -485,7 +485,7 @@ function buscarUsuario(id) {
             return response.json();
         })
         .then(usuarioData => {
-            mostrarResultados([usuarioData]);
+            mostrarUsuario([usuarioData]);
         })
         .catch(error => {
             results.innerHTML = `<p class="text-red-600">Error: ${error.message}</p>`;

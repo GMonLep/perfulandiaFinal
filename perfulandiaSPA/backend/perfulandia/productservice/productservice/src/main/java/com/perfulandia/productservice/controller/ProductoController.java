@@ -15,7 +15,7 @@ import org.springframework.web.client.RestTemplate;
 
 @RestController
 @RequestMapping("/api/productos")
-@CrossOrigin("*")
+@CrossOrigin(origins = "https://perfulandia-final.vercel.app")
 public class ProductoController {
 
 
