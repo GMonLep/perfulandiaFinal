@@ -3,6 +3,8 @@ package com.perfulandia.usuarioservice.controller;
 import com.perfulandia.usuarioservice.model.Usuario;
 import com.perfulandia.usuarioservice.repository.UsuarioRepository;
 import com.perfulandia.usuarioservice.service.UsuarioService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.perfulandia.usuarioservice.model.Usuario;
 import java.util.List;
@@ -26,8 +28,9 @@ public class UsuarioController {
     }
 
     @PostMapping
-    public Usuario guardar(@RequestBody Usuario usuario){
-        return service.guardar(usuario);
+    public ResponseEntity<Usuario> guardar(@RequestBody Usuario usuario) {
+        Usuario guardado = service.guardar(usuario);
+        return ResponseEntity.status(HttpStatus.CREATED).body(guardado);
     }
 
     @GetMapping("/{id}")

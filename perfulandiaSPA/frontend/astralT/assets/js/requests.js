@@ -293,7 +293,7 @@ userButtons.buscar.addEventListener("click", () => switchUserTab("buscar"));
 switchUserTab("guardar");
 
 //MOSTRAR USUARIOS DE LA BD
-fetch('https://perfulandiafinal-production.up.railway.app/api/usuarios')
+fetch('https://resilient-tranquility-usuarios.up.railway.app/api/usuarios')
     .then(response => response.json())
     .then(data => {
         const list = document.getElementById('listaUsuarios');
@@ -308,12 +308,57 @@ fetch('https://perfulandiafinal-production.up.railway.app/api/usuarios')
             <h2 class="text-lg font-semibold text-gray-800">${usuario.nombre}</h2>
           </div>
           <div class="text-right ">
-            <p class="text-sm text-gray-600 ">Correo: <span class="font-medium text-green-600">$${usuario.correo}</span></p>
-            <p class="text-sm text-gray-600">Rol: <span class="font-medium text-blue-600">${producto.rol}</span></p>
+            <p class="text-sm text-gray-600 ">Correo: <span class="font-medium text-green-600">${usuario.correo}</span></p>
+            <p class="text-sm text-gray-600">Rol: <span class="font-medium text-blue-600">${usuario.rol}</span></p>
           </div>
         </div>
       `;
             list.appendChild(li);
         });
     })
-    .catch(error => console.error('ERROR BUSCANDO PRODUCTOS:', error));
+    .catch(error => console.error('ERROR BUSCANDO USUARIOS:', error));
+
+//AGREGAR usuario DE LA BD
+document.getElementById("formularioGuardarUsuario").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const nombre = document.getElementById("username").value.trim();
+    const correo = document.getElementById("correo").value.trim();
+    const rol = document.getElementById("rol").value.trim();
+
+
+    if (!nombre || !correo  || !rol ) return;
+
+    const usuarioData = { nombre, correo, rol };
+
+    fetch('https://resilient-tranquility-usuarios.up.railway.app/api/usuarios', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(usuarioData),
+    })
+        .then(async response => {
+            if (!response.ok) throw new Error('Error al guardar usuario');
+
+            const text = await response.text();
+            if (text) {
+                return JSON.parse(text);
+            }
+            return {};
+        })
+        .then(usuarioData => {
+            document.getElementById("formularioGuardarUsuario").reset();
+            Toastify({
+                text: "¡Usuario agregado con éxito!",
+                backgroundColor: "#4CAF50",
+                duration: 3000
+            }).showToast();
+        })
+        .catch(error => {
+            Toastify({
+                text: "Error al agregar el usuario.",
+                backgroundColor: "#FF6347",
+                duration: 3000
+            }).showToast();
+            console.error("Error:", error);
+        });
+});
